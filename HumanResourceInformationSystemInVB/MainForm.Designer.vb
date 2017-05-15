@@ -27,6 +27,7 @@ Partial Class MainForm
         Me.MetroTile4 = New MetroFramework.Controls.MetroTile()
         Me.MetroLink1 = New MetroFramework.Controls.MetroLink()
         Me.MetroTile5 = New MetroFramework.Controls.MetroTile()
+        Me.MetroTile3 = New MetroFramework.Controls.MetroTile()
         Me.SuspendLayout()
         '
         'MetroTile1
@@ -50,7 +51,7 @@ Partial Class MainForm
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MetroTile2.Location = New System.Drawing.Point(69, 126)
         Me.MetroTile2.Name = "MetroTile2"
-        Me.MetroTile2.Size = New System.Drawing.Size(658, 247)
+        Me.MetroTile2.Size = New System.Drawing.Size(438, 247)
         Me.MetroTile2.TabIndex = 1
         Me.MetroTile2.Text = "Dashboard"
         Me.MetroTile2.UseSelectable = True
@@ -90,11 +91,25 @@ Partial Class MainForm
         Me.MetroTile5.Text = "Employees"
         Me.MetroTile5.UseSelectable = True
         '
+        'MetroTile3
+        '
+        Me.MetroTile3.ActiveControl = Nothing
+        Me.MetroTile3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.MetroTile3.Location = New System.Drawing.Point(539, 126)
+        Me.MetroTile3.Name = "MetroTile3"
+        Me.MetroTile3.Size = New System.Drawing.Size(188, 247)
+        Me.MetroTile3.TabIndex = 6
+        Me.MetroTile3.Text = "Payroll"
+        Me.MetroTile3.UseSelectable = True
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(778, 602)
+        Me.Controls.Add(Me.MetroTile3)
         Me.Controls.Add(Me.MetroTile5)
         Me.Controls.Add(Me.MetroLink1)
         Me.Controls.Add(Me.MetroTile4)
@@ -111,4 +126,5 @@ Partial Class MainForm
     Friend WithEvents MetroTile4 As MetroFramework.Controls.MetroTile
     Friend WithEvents MetroLink1 As MetroFramework.Controls.MetroLink
     Friend WithEvents MetroTile5 As MetroFramework.Controls.MetroTile
+    Friend WithEvents MetroTile3 As MetroFramework.Controls.MetroTile
 End Class

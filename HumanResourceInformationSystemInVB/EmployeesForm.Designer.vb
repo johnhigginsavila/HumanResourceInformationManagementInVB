@@ -46,6 +46,10 @@ Partial Class Employees
         Me.lblId = New MetroFramework.Controls.MetroLabel()
         Me.txtBoxSearchByLastname = New MetroFramework.Controls.MetroTextBox()
         Me.MetroLabel8 = New MetroFramework.Controls.MetroLabel()
+        Me.cbGender = New MetroFramework.Controls.MetroComboBox()
+        Me.MetroLabel9 = New MetroFramework.Controls.MetroLabel()
+        Me.txtBoxPhilhealthId = New MetroFramework.Controls.MetroTextBox()
+        Me.MetroLabel10 = New MetroFramework.Controls.MetroLabel()
         CType(Me.MetroGrid1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -140,7 +144,7 @@ Partial Class Employees
         'MetroLabel6
         '
         Me.MetroLabel6.AutoSize = True
-        Me.MetroLabel6.Location = New System.Drawing.Point(325, 447)
+        Me.MetroLabel6.Location = New System.Drawing.Point(79, 551)
         Me.MetroLabel6.Name = "MetroLabel6"
         Me.MetroLabel6.Size = New System.Drawing.Size(42, 19)
         Me.MetroLabel6.TabIndex = 6
@@ -266,7 +270,7 @@ Partial Class Employees
         Me.txtBoxTinId.CustomButton.UseSelectable = True
         Me.txtBoxTinId.CustomButton.Visible = False
         Me.txtBoxTinId.Lines = New String(-1) {}
-        Me.txtBoxTinId.Location = New System.Drawing.Point(382, 447)
+        Me.txtBoxTinId.Location = New System.Drawing.Point(136, 551)
         Me.txtBoxTinId.MaxLength = 32767
         Me.txtBoxTinId.Name = "txtBoxTinId"
         Me.txtBoxTinId.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -437,11 +441,76 @@ Partial Class Employees
         Me.MetroLabel8.TabIndex = 22
         Me.MetroLabel8.Text = "Main Menu"
         '
+        'cbGender
+        '
+        Me.cbGender.FormattingEnabled = True
+        Me.cbGender.ItemHeight = 23
+        Me.cbGender.Items.AddRange(New Object() {"Male", "Female"})
+        Me.cbGender.Location = New System.Drawing.Point(382, 441)
+        Me.cbGender.Name = "cbGender"
+        Me.cbGender.Size = New System.Drawing.Size(125, 29)
+        Me.cbGender.TabIndex = 23
+        Me.cbGender.UseSelectable = True
+        '
+        'MetroLabel9
+        '
+        Me.MetroLabel9.AutoSize = True
+        Me.MetroLabel9.Location = New System.Drawing.Point(315, 447)
+        Me.MetroLabel9.Name = "MetroLabel9"
+        Me.MetroLabel9.Size = New System.Drawing.Size(52, 19)
+        Me.MetroLabel9.TabIndex = 24
+        Me.MetroLabel9.Text = "Gender"
+        '
+        'txtBoxPhilhealthId
+        '
+        '
+        '
+        '
+        Me.txtBoxPhilhealthId.CustomButton.Image = Nothing
+        Me.txtBoxPhilhealthId.CustomButton.Location = New System.Drawing.Point(103, 1)
+        Me.txtBoxPhilhealthId.CustomButton.Name = ""
+        Me.txtBoxPhilhealthId.CustomButton.Size = New System.Drawing.Size(21, 21)
+        Me.txtBoxPhilhealthId.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
+        Me.txtBoxPhilhealthId.CustomButton.TabIndex = 1
+        Me.txtBoxPhilhealthId.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
+        Me.txtBoxPhilhealthId.CustomButton.UseSelectable = True
+        Me.txtBoxPhilhealthId.CustomButton.Visible = False
+        Me.txtBoxPhilhealthId.Lines = New String(-1) {}
+        Me.txtBoxPhilhealthId.Location = New System.Drawing.Point(382, 547)
+        Me.txtBoxPhilhealthId.MaxLength = 32767
+        Me.txtBoxPhilhealthId.Name = "txtBoxPhilhealthId"
+        Me.txtBoxPhilhealthId.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtBoxPhilhealthId.PromptText = "Phil-health ID"
+        Me.txtBoxPhilhealthId.ScrollBars = System.Windows.Forms.ScrollBars.None
+        Me.txtBoxPhilhealthId.SelectedText = ""
+        Me.txtBoxPhilhealthId.SelectionLength = 0
+        Me.txtBoxPhilhealthId.SelectionStart = 0
+        Me.txtBoxPhilhealthId.ShortcutsEnabled = True
+        Me.txtBoxPhilhealthId.Size = New System.Drawing.Size(125, 23)
+        Me.txtBoxPhilhealthId.TabIndex = 25
+        Me.txtBoxPhilhealthId.UseSelectable = True
+        Me.txtBoxPhilhealthId.WaterMark = "Phil-health ID"
+        Me.txtBoxPhilhealthId.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
+        Me.txtBoxPhilhealthId.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        '
+        'MetroLabel10
+        '
+        Me.MetroLabel10.AutoSize = True
+        Me.MetroLabel10.Location = New System.Drawing.Point(280, 547)
+        Me.MetroLabel10.Name = "MetroLabel10"
+        Me.MetroLabel10.Size = New System.Drawing.Size(87, 19)
+        Me.MetroLabel10.TabIndex = 26
+        Me.MetroLabel10.Text = "Phil-health ID"
+        '
         'Employees
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(778, 602)
+        Me.Controls.Add(Me.MetroLabel10)
+        Me.Controls.Add(Me.txtBoxPhilhealthId)
+        Me.Controls.Add(Me.MetroLabel9)
+        Me.Controls.Add(Me.cbGender)
         Me.Controls.Add(Me.MetroLabel8)
         Me.Controls.Add(Me.txtBoxSearchByLastname)
         Me.Controls.Add(Me.lblId)
@@ -492,4 +561,8 @@ Partial Class Employees
     Friend WithEvents lblId As MetroFramework.Controls.MetroLabel
     Friend WithEvents txtBoxSearchByLastname As MetroFramework.Controls.MetroTextBox
     Friend WithEvents MetroLabel8 As MetroFramework.Controls.MetroLabel
+    Friend WithEvents cbGender As MetroFramework.Controls.MetroComboBox
+    Friend WithEvents MetroLabel9 As MetroFramework.Controls.MetroLabel
+    Friend WithEvents txtBoxPhilhealthId As MetroFramework.Controls.MetroTextBox
+    Friend WithEvents MetroLabel10 As MetroFramework.Controls.MetroLabel
 End Class

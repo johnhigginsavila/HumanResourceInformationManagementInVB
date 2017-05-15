@@ -37,4 +37,9 @@
         formLogIn.Show()
         Me.Hide()
     End Sub
+
+    Private Sub MetroTile3_Click_1(sender As Object, e As EventArgs) Handles MetroTile3.Click
+        Payroll.Show()
+        Me.Hide()
+    End Sub
 End Class

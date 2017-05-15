@@ -217,6 +217,12 @@
     <Compile Include="PayrollForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PaySlip.Designer.vb">
+      <DependentUpon>PaySlip.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PaySlip.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="RecruitmentForm.Designer.vb">
       <DependentUpon>RecruitmentForm.vb</DependentUpon>
     </Compile>
@@ -255,6 +261,12 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="PayrollForm.resx">
+      <DependentUpon>PayrollForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PaySlip.resx">
+      <DependentUpon>PaySlip.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RecruitmentForm.resx">
       <DependentUpon>RecruitmentForm.vb</DependentUpon>
     </EmbeddedResource>
@@ -267,6 +279,8 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="My Project\DataSources\Npgsql.Schema.DbColumn.datasource" />
+    <None Include="My Project\DataSources\Npgsql.Schema.NpgsqlDbColumn.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
@@ -276,7 +290,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\profileIcon.png" />
+    <None Include="Resources\profileIcon1.png" />
+    <None Include="Resources\profileIcon2.png" />
     <Content Include="Scripts\Chart.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

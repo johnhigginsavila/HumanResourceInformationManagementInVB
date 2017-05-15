@@ -89,10 +89,13 @@ Public Class HireForm
                     cmd.Parameters.AddWithValue("@id", employeeId)
                     cmd.ExecuteNonQuery()
                     con.Close()
-                    Me.Hide()
                     RecruitmentForm.load()
+                    Employees.load()
+                    Payroll.load()
+
                     RecruitmentForm.Show()
                     MessageBox.Show("Successfully added" & applicantName & " as a new Employee")
+                    Me.Hide()
                 Catch ex As Exception
                     MessageBox.Show(ex.Message)
                 End Try

@@ -7,7 +7,7 @@ Public Class Employees
 
 
     Public Sub load()
-        Dim query As String = "select em.id, em.lastname, em.firstname, em.email, dept.name as department, job.name as job, sal.salary, em.tin_id , em.pagibig_id, em.sss_id, de.start_date, de.end_date from employee em inner join deployment de on(em.id = de.employee_id) inner join department dept on (de.department_id = dept.id) inner join job job on (de.job_id = job.id) inner join salary sal on (job.salary_grade = sal.id) where em.employed = true order by em.id asc"
+        Dim query As String = "select em.id, em.lastname, em.firstname, em.email, dept.name as department, job.name as job, sal.salary, em.tin_id , em.pagibig_id, em.sss_id, de.start_date, de.end_date, em.philhealth_id, em.gender from employee em inner join deployment de on(em.id = de.employee_id) inner join department dept on (de.department_id = dept.id) inner join job job on (de.job_id = job.id) inner join salary sal on (job.salary_grade = sal.id) where em.employed = true order by em.id asc"
         Dim adpt As New NpgsqlDataAdapter(query, con)
         Dim ds As New DataSet()
         adpt.Fill(ds)
@@ -30,13 +30,15 @@ Public Class Employees
         con.Open()
         Try
             cmd = con.CreateCommand()
-            cmd.CommandText = "update employee set lastname=@lastname, firstname=@firstname, email=@email, tin_id=@tin_id, pagibig_id =@pagibig_id, sss_id = @sss_id where id=@id"
+            cmd.CommandText = "update employee set lastname=@lastname, firstname=@firstname, email=@email, tin_id=@tin_id, pagibig_id =@pagibig_id, sss_id = @sss_id, philhealth_id=@philhealth_id, gender=@gender where id=@id"
             cmd.Parameters.AddWithValue("@lastname", txtBoxLastname.Text)
             cmd.Parameters.AddWithValue("@firstname", txtBoxFirstname.Text)
             cmd.Parameters.AddWithValue("@email", txtBoxEmail.Text)
             cmd.Parameters.AddWithValue("@tin_id", txtBoxTinId.Text)
             cmd.Parameters.AddWithValue("@pagibig_id", txtBoxPagibigId.Text)
             cmd.Parameters.AddWithValue("@sss_id", txtBoxSssId.Text)
+            cmd.Parameters.AddWithValue("@philhealth_id", txtBoxPhilhealthId.text)
+            cmd.Parameters.AddWithValue("@gender", cbGender.text)
             cmd.Parameters.AddWithValue("@id", Integer.Parse(lblId.Text))
             cmd.ExecuteNonQuery()
             con.Close()
@@ -82,7 +84,7 @@ Public Class Employees
         Dim ds As New DataSet
         Try
             con.Open()
-            adapter = New NpgsqlDataAdapter("select em.id, em.lastname, em.firstname, em.email, dept.name as department, job.name as job, sal.salary, em.tin_id , em.pagibig_id, em.sss_id, de.start_date, de.end_date from employee em inner join deployment de on(em.id = de.employee_id) inner join department dept on (de.department_id = dept.id) inner join job job on (de.job_id = job.id) inner join salary sal on (job.salary_grade = sal.id) where employed=true and lower(em.lastname) like '%" & txtBoxSearchByLastname.Text & "%'", con)
+            adapter = New NpgsqlDataAdapter("select em.id, em.lastname, em.firstname, em.email, dept.name as department, job.name as job, sal.salary, em.tin_id , em.pagibig_id, em.sss_id, de.start_date, de.end_date, em.philhealth_id, em.gender from employee em inner join deployment de on(em.id = de.employee_id) inner join department dept on (de.department_id = dept.id) inner join job job on (de.job_id = job.id) inner join salary sal on (job.salary_grade = sal.id) where employed=true and lower(em.lastname) like '%" & txtBoxSearchByLastname.Text & "%'", con)
             adapter.Fill(ds)
             MetroGrid1.DataSource = ds.Tables(0)
             con.Close()
@@ -107,6 +109,8 @@ Public Class Employees
             txtBoxTinId.Text = row.Cells(7).Value.ToString()
             txtBoxPagibigId.Text = row.Cells(8).Value.ToString()
             txtBoxSssId.Text = row.Cells(9).Value.ToString()
+            txtBoxPhilhealthId.Text = row.Cells(12).Value.ToString()
+            cbGender.Text = row.Cells(13).Value.ToString()
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
@@ -117,9 +121,7 @@ Public Class Employees
         Me.Hide()
     End Sub
 
-    Private Sub MetroGrid1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles MetroGrid1.CellContentClick
 
-    End Sub
 
 
 End Class

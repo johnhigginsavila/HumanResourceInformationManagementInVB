@@ -3,7 +3,7 @@ Public Class RecruitmentForm
     Dim str As String = "Server= 127.0.0.1;Port=5432;Database=hr_information_system_db;User Id=postgres;Password=1234;"
     Dim con As New NpgsqlConnection(str)
     Public Sub load()
-        Dim query As String = "select id, lastname, firstname, email, tin_id , pagibig_id, sss_id from employee where admin = false and employed = false order by id asc"
+        Dim query As String = "select id, lastname, firstname, email, tin_id , pagibig_id, sss_id, philhealth_id, gender from employee where admin = false and employed = false order by id asc"
         Dim adpt As New NpgsqlDataAdapter(query, con)
         Dim ds As New DataSet()
         adpt.Fill(ds)
@@ -15,29 +15,31 @@ Public Class RecruitmentForm
         txtBoxTinId.Clear()
         txtBoxPagibigId.Clear()
         txtBoxSssId.Clear()
+        cbGender.Text = ""
+        txtBoxPhilhealth.Clear()
     End Sub
     Private Sub RecruitmentForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         load()
     End Sub
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
 
-    End Sub
 
     Private Sub btnAddApplicant_Click(sender As Object, e As EventArgs) Handles btnAddApplicant.Click
-        If (txtBoxFirstname.Text = "" Or txtBoxLastname.Text = "" Or txtBoxEmail.Text = "" Or txtBoxTinId.Text = "" Or txtBoxPagibigId.Text = "" Or txtBoxSssId.Text = "") Then
+        If (txtBoxFirstname.Text = "" Or txtBoxLastname.Text = "" Or txtBoxEmail.Text = "" Or txtBoxTinId.Text = "" Or txtBoxPagibigId.Text = "" Or txtBoxSssId.Text = "" Or txtBoxPhilhealth.Text = "" Or cbGender.Text = "") Then
             MessageBox.Show("Complete the Application details.")
         Else
             Dim cmd As NpgsqlCommand
             con.Open()
             Try
                 cmd = con.CreateCommand
-                cmd.CommandText = "insert into employee (lastname, firstname, email, tin_id, pagibig_id, sss_id)values(@lastname, @firstname, @email, @tin_id, @pagibig_id, @sss_id)"
+                cmd.CommandText = "insert into employee (lastname, firstname, email, tin_id, pagibig_id, sss_id, philhealth_id, gender)values(@lastname, @firstname, @email, @tin_id, @pagibig_id, @sss_id, @philhealth_id, @gender)"
                 cmd.Parameters.AddWithValue("@lastname", txtBoxLastname.Text)
                 cmd.Parameters.AddWithValue("@firstname", txtBoxFirstname.Text)
                 cmd.Parameters.AddWithValue("@email", txtBoxEmail.Text)
                 cmd.Parameters.AddWithValue("@tin_id", txtBoxTinId.Text)
                 cmd.Parameters.AddWithValue("@pagibig_id", txtBoxPagibigId.Text)
                 cmd.Parameters.AddWithValue("@sss_id", txtBoxSssId.Text)
+                cmd.Parameters.AddWithValue("@philhealth_id", txtBoxPhilhealth)
+                cmd.Parameters.AddWithValue("@gender", cbGender.Text)
                 cmd.ExecuteNonQuery()
                 con.Close()
                 load()
@@ -59,6 +61,8 @@ Public Class RecruitmentForm
             txtBoxTinId.Text = row.Cells(4).Value.ToString()
             txtBoxPagibigId.Text = row.Cells(5).Value.ToString()
             txtBoxSssId.Text = row.Cells(6).Value.ToString()
+            txtBoxPhilhealth.Text = row.Cells(7).Value.ToString()
+            cbGender.Text = row.Cells(8).Value.ToString()
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
@@ -69,24 +73,32 @@ Public Class RecruitmentForm
     End Sub
 
     Private Sub btnUpdateApplicant_Click(sender As Object, e As EventArgs) Handles btnUpdateApplicant.Click
-        Dim cmd As NpgsqlCommand
-        con.Open()
-        Try
-            cmd = con.CreateCommand()
-            cmd.CommandText = "update employee set lastname=@lastname, firstname=@firstname, email=@email, tin_id=@tin_id, pagibig_id =@pagibig_id, sss_id = @sss_id where id=@id"
-            cmd.Parameters.AddWithValue("@lastname", txtBoxLastname.Text)
-            cmd.Parameters.AddWithValue("@firstname", txtBoxFirstname.Text)
-            cmd.Parameters.AddWithValue("@email", txtBoxEmail.Text)
-            cmd.Parameters.AddWithValue("@tin_id", txtBoxTinId.Text)
-            cmd.Parameters.AddWithValue("@pagibig_id", txtBoxPagibigId.Text)
-            cmd.Parameters.AddWithValue("@sss_id", txtBoxSssId.Text)
-            cmd.Parameters.AddWithValue("@id", Integer.Parse(id.Text))
-            cmd.ExecuteNonQuery()
-            con.Close()
-            load()
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-        End Try
+        If (txtBoxFirstname.Text = "" Or txtBoxLastname.Text = "" Or txtBoxEmail.Text = "" Or txtBoxTinId.Text = "" Or txtBoxPagibigId.Text = "" Or txtBoxSssId.Text = "" Or txtBoxPhilhealth.Text = "" Or cbGender.Text = "") Then
+            MessageBox.Show("Please Select a record.")
+        Else
+            Dim cmd As NpgsqlCommand
+            con.Open()
+            Try
+                cmd = con.CreateCommand()
+                cmd.CommandText = "update employee set lastname=@lastname, firstname=@firstname, email=@email, tin_id=@tin_id, pagibig_id =@pagibig_id, sss_id = @sss_id, philhealth_id = @philhealth_id, gender=@gender where id=@id"
+                cmd.Parameters.AddWithValue("@lastname", txtBoxLastname.Text)
+                cmd.Parameters.AddWithValue("@firstname", txtBoxFirstname.Text)
+                cmd.Parameters.AddWithValue("@email", txtBoxEmail.Text)
+                cmd.Parameters.AddWithValue("@tin_id", txtBoxTinId.Text)
+                cmd.Parameters.AddWithValue("@pagibig_id", txtBoxPagibigId.Text)
+                cmd.Parameters.AddWithValue("@sss_id", txtBoxSssId.Text)
+                cmd.Parameters.AddWithValue("@philhealth_id", txtBoxPhilhealth.Text)
+                cmd.Parameters.AddWithValue("@gender", cbGender.Text)
+                cmd.Parameters.AddWithValue("@id", Integer.Parse(id.Text))
+                cmd.ExecuteNonQuery()
+                con.Close()
+                load()
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            End Try
+        End If
+
+
     End Sub
 
     Private Sub btnDeleteApplicant_Click(sender As Object, e As EventArgs) Handles btnDeleteApplicant.Click
@@ -109,7 +121,7 @@ Public Class RecruitmentForm
         Dim ds As New DataSet
         Try
             con.Open()
-            adapter = New NpgsqlDataAdapter("select id, lastname, firstname, email, tin_id , pagibig_id, sss_id from employee where admin=false and employed=false and lower(lastname) like '%" & txtBoxSeachByLastname.Text & "%'", con)
+            adapter = New NpgsqlDataAdapter("select id, lastname, firstname, email, tin_id , pagibig_id, sss_id, philhealth_id, gender from employee where admin=false and employed=false and lower(lastname) like '%" & txtBoxSeachByLastname.Text & "%'", con)
             adapter.Fill(ds)
             MetroGrid1.DataSource = ds.Tables(0)
             con.Close()
@@ -140,63 +152,5 @@ Public Class RecruitmentForm
         Me.Hide()
     End Sub
 
-    Private Sub MetroLabel2_Click(sender As Object, e As EventArgs) Handles MetroLabel2.Click
 
-    End Sub
-
-    Private Sub MetroLabel1_Click(sender As Object, e As EventArgs) Handles MetroLabel1.Click
-
-    End Sub
-
-    Private Sub MetroLabel4_Click(sender As Object, e As EventArgs) Handles MetroLabel4.Click
-
-    End Sub
-
-    Private Sub txtBoxEmail_Click(sender As Object, e As EventArgs) Handles txtBoxEmail.Click
-
-    End Sub
-
-    Private Sub MetroLabel6_Click(sender As Object, e As EventArgs) Handles MetroLabel6.Click
-
-    End Sub
-
-    Private Sub txtBoxPagibigId_Click(sender As Object, e As EventArgs) Handles txtBoxPagibigId.Click
-
-    End Sub
-
-    Private Sub MetroLabel7_Click(sender As Object, e As EventArgs) Handles MetroLabel7.Click
-
-    End Sub
-
-    Private Sub MetroLabel5_Click(sender As Object, e As EventArgs) Handles MetroLabel5.Click
-
-    End Sub
-
-    Private Sub txtBoxLastname_Click(sender As Object, e As EventArgs) Handles txtBoxLastname.Click
-
-    End Sub
-
-    Private Sub MetroLabel3_Click(sender As Object, e As EventArgs) Handles MetroLabel3.Click
-
-    End Sub
-
-    Private Sub MetroLabel9_Click(sender As Object, e As EventArgs) Handles MetroLabel9.Click
-
-    End Sub
-
-    Private Sub txtBoxFirstname_Click(sender As Object, e As EventArgs) Handles txtBoxFirstname.Click
-
-    End Sub
-
-    Private Sub txtBoxTinId_Click(sender As Object, e As EventArgs) Handles txtBoxTinId.Click
-
-    End Sub
-
-    Private Sub txtBoxSssId_Click(sender As Object, e As EventArgs) Handles txtBoxSssId.Click
-
-    End Sub
-
-    Private Sub txtBoxSeachByLastname_Click(sender As Object, e As EventArgs) Handles txtBoxSeachByLastname.Click
-
-    End Sub
 End Class
